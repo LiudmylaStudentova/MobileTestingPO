@@ -19,7 +19,7 @@ public class AppiumTest extends AndroidSetup {
     //Add in Batch Mode
     //PersonalList
 
-    HomeScreenPage HomeScreen = new HomeScreenPage();
+    HomeScreenPage HomeScreen = new HomeScreenPage(driver);
     TaskListScreenPage TaskListScreen = new TaskListScreenPage();
     AddInBatchMode AddInBatchMode = new AddInBatchMode();
     PersonalListPage PersonalList = new PersonalListPage();
@@ -29,17 +29,17 @@ public class AppiumTest extends AndroidSetup {
 
         WebDriverWait wait = new WebDriverWait(driver, 30);
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-        driver.findElement(HomeScreen.addFirstTaskButton).click();
-        driver.findElement(HomeScreen.taskInput).sendKeys("test task");
-        driver.findElement(HomeScreen.dueDate).click();
-        driver.findElement(HomeScreen.doneButton).click();
-        driver.findElement(HomeScreen.dueTime).click();
-        driver.findElement(HomeScreen.doneButton).click();
-        driver.findElement(HomeScreen.repeatButton).click();
-        driver.findElement(HomeScreen.repeatButtonOnceAWeek).click();
-        driver.findElement(HomeScreen.addToListButton).click();
-        driver.findElement(HomeScreen.addToListButtonPersonal).click();
-        driver.findElement(HomeScreen.saveTask).click();
+        HomeScreen.addFirstTaskButtonclick();
+        HomeScreen.taskInputSendKey();
+        HomeScreen.dueDateClick();
+        HomeScreen.doneButtonClick();
+        HomeScreen.dueTimeClick();
+        HomeScreen.doneButtonClick();
+        HomeScreen.repeatButtonClick();
+        HomeScreen.repeatButtonOnceAWeekClick();
+        HomeScreen.addToListButtonClick();
+        HomeScreen.addToListButtonPersonalClick();
+        HomeScreen.saveTaskclick();
 
         wait.until(ExpectedConditions.presenceOfElementLocated(TaskListScreen.taskName));
 
