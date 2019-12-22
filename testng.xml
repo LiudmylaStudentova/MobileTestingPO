@@ -1,0 +1,11 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="UI">
+
+    <splendo.test name="ToDoist tests">
+
+        <classes>
+            <class name="todoist.ToDoistTests"/>
+        </classes>
+    </splendo.test>
+
+</suite>
