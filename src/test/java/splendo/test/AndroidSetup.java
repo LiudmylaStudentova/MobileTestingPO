@@ -14,6 +14,16 @@ public class AndroidSetup {
 
   protected AndroidDriver driver;
 
+  @BeforeClass
+  public void setUp() throws Exception {
+    prepareAndroidForAppium();
+  }
+
+  @AfterClass
+  public void tearDown() throws Exception {
+    driver.quit();
+  }
+
   protected void prepareAndroidForAppium() throws MalformedURLException {
     File appDir = new File("app");
     File app = new File(appDir, "splendo.apk");
@@ -27,13 +37,5 @@ public class AndroidSetup {
 
     driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
   }
-  @BeforeClass
-  public void setUp() throws Exception {
-    prepareAndroidForAppium();
-  }
 
-  @AfterClass
-  public void tearDown() throws Exception {
-    driver.quit();
-  }
 }
