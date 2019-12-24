@@ -54,6 +54,8 @@ public class HomeScreenPage {
     public void popUpReapeatTaskNoClick(){
         driver.findElement(popUpReapeatTaskNo).click();
     }
+    public void addNewTaskButtonClick(){driver.findElement(addNewTaskButton).click();}
+
 }
 
 

@@ -15,6 +15,7 @@ public class AppiumTest extends AndroidSetup {
     // Home Screen
     // Task List Screen
     //Add in Batch Mode
+
     //PersonalList
 
     HomeScreenPage HomeScreen;
@@ -26,9 +27,9 @@ public class AppiumTest extends AndroidSetup {
     public void showTest() {
 
         HomeScreen = new HomeScreenPage(driver);
-        TaskListScreen = new TaskListScreenPage();
-        AddInBatchMode = new AddInBatchMode();
-        PersonalList = new PersonalListPage();
+        TaskListScreen = new TaskListScreenPage(driver);
+        AddInBatchMode = new AddInBatchMode(driver);
+        PersonalList = new PersonalListPage(driver);
 
         WebDriverWait wait = new WebDriverWait(driver, 30);
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
@@ -54,31 +55,21 @@ public class AppiumTest extends AndroidSetup {
     public void completeTask() throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, 30);
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-        driver.findElement(TaskListScreen.taskCheckBox).click();
-
-        driver.findElement(HomeScreen.popUpReapeatTaskNo).click();
-
+        TaskListScreen.taskCheckBoxCkick();
+        HomeScreen.popUpReapeatTaskNoClick();
         wait.until(ExpectedConditions.presenceOfElementLocated(TaskListScreen.toolBar));
-
-        driver.findElement(TaskListScreen.toolBar).click();
-
-        driver.findElement(TaskListScreen.finishedMenuItem).click();
-
+        TaskListScreen.toolBarClick();
+        TaskListScreen.finishedMenuItemClick();
         assert driver.findElement(TaskListScreen.taskName).isDisplayed();
     }
 
     @Test(priority = 3)
     public void addQuickTask() throws InterruptedException {
-        driver.findElement(TaskListScreen.toolBar).click();
-
-        driver.findElement(TaskListScreen.allListsMenuItem).click();
-
-        driver.findElement(TaskListScreen.quickTask).click();
-
-        driver.findElement(TaskListScreen.quickTask).sendKeys("test task");
-
-        driver.findElement(TaskListScreen.doneButtonForQuickTask).click();
-
+        TaskListScreen.toolBarClick();
+        TaskListScreen.allListsMenuItemClick();
+        TaskListScreen.quickTaskClick();
+        TaskListScreen.quickTaskClickSK();
+        TaskListScreen.doneButtonForQuickTaskClick();
         assert driver.findElement(TaskListScreen.taskName).isDisplayed();
     }
 
@@ -86,25 +77,15 @@ public class AppiumTest extends AndroidSetup {
     public void addInBatchMode() throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, 30);
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-        driver.findElement(AddInBatchMode.moreOptions).click();
-
-        driver.findElement(AddInBatchMode.addInBatchMode).click();
-
-        driver.findElement(AddInBatchMode.whatIsToBeDone).sendKeys("test task done");
-
-        driver.findElement(HomeScreen.dueDate).click();
-
-        driver.findElement(HomeScreen.doneButton).click();
-
+        AddInBatchMode.moreOptionsClick();
+        AddInBatchMode.addInBatchModeClick();
+        AddInBatchMode.whatIsToBeDoneSK();
+        HomeScreen.dueDateClick();
+        HomeScreen.doneButtonClick();
         wait.until(ExpectedConditions.presenceOfElementLocated(HomeScreen.saveTask));
-
-        driver.findElement(HomeScreen.saveTask).click();
-
+        HomeScreen.saveTaskclick();
         assert driver.findElement(TaskListScreen.taskName).isDisplayed();
-
-
-        driver.findElement(TaskListScreen.taskCheckBox).click();
-
+        TaskListScreen.taskCheckBoxCkick();
         assert driver.findElement(TaskListScreen.listMain).isDisplayed();
     }
 
@@ -112,33 +93,19 @@ public class AppiumTest extends AndroidSetup {
     public void addTaskToPersonalListTest() throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, 30);
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-        driver.findElement(TaskListScreen.allListsMenuItem).click();
-
-        driver.findElement(PersonalList.PersonalMenuItem).click();
-
-        driver.findElement(HomeScreen.addNewTaskButton).click();
-
-        driver.findElement(PersonalList.taskInputPersonal).sendKeys("Do massage");
-
-        driver.findElement(HomeScreen.dueDate).click();
-
-        driver.findElement(HomeScreen.doneButton).click();
-
+        TaskListScreen.allListsMenuItemClick();
+        PersonalList.personalMenuItemClick();
+        HomeScreen.addNewTaskButtonClick();
+        PersonalList.taskInputPersonalSK();
+        HomeScreen.dueDateClick();
+        HomeScreen.doneButtonClick();
         wait.until(ExpectedConditions.presenceOfElementLocated(HomeScreen.saveTask));
-
-        driver.findElement(HomeScreen.saveTask).click();
-
+        HomeScreen.saveTaskclick();
         assert driver.findElement(TaskListScreen.taskName).isDisplayed();
-
-        driver.findElement(TaskListScreen.taskCheckBox).click();
-
+        TaskListScreen.taskCheckBoxCkick();
         wait.until(ExpectedConditions.presenceOfElementLocated(TaskListScreen.toolBar));
-
-
-        driver.findElement(TaskListScreen.toolBar).click();
-
-        driver.findElement(TaskListScreen.finishedMenuItem).click();
-
+        TaskListScreen.toolBarClick();
+        TaskListScreen.finishedMenuItemClick();
         assert driver.findElement(TaskListScreen.taskName).isDisplayed();
     }
 }
